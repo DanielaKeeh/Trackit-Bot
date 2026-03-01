@@ -1,8 +1,0 @@
-name: trackit
-cloud_provider: aws
-dynamo:
-  capacity: REPLACE_ME
-  table_name: REPLACE_ME
-chat_provider: token
-bot_token: 
-secret_token: 7kfvY4sBToobJVfOibLsjlyyknb4wov8Yy6aJTYNBoCgZJrTXkT51iw54yFF33Y2
