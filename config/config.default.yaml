@@ -1,0 +1,14 @@
+logger:
+  stdout: yes
+  severity: debug
+bots:
+  main:
+    pool_size: 1
+    inline_args: true
+    provider:
+      name: REPLACE_ME
+      token: REPLACE_ME
+      debug: true
+    state_repository:
+name: json
+storage: ./storage

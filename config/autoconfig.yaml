@@ -1,0 +1,6 @@
+autoconfig:
+  env_prefix: TRACKIT
+  default_files:
+    - ./config/config.default.yaml
+  files:
+    - ./config/config.yaml
