@@ -1,0 +1,24 @@
+bots:
+  main:
+    provider:
+      name: telegram
+      token: 7852198078:AAGizshib2I1W4KbSYyUSufGpy54VSkR2yQ
+      mode: webhook_lambda
+      debug: true
+    state_repository:
+              name: dynamoid
+              dynamoid_config: true
+              region:  'us-east-1'
+              namespace: 'trackit'
+              read_capacity: 3
+              write_capacity: 3
+  develop:
+    pool_size: 1
+    inline_args: true
+    provider:
+      name: telegram
+      token: 7852198078:AAGizshib2I1W4KbSYyUSufGpy54VSkR2yQ
+      debug: true
+    state_repository:
+              name: sequel
+              endpoint: sqlite://develop.sqlite
