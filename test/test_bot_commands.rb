@@ -49,4 +49,66 @@ class TestBotCommands < BotTest
     @bot.expects(:send_message).with(esperado, anything)
     @bot.receives('/VerObjetos')
   end
+
+  def test_eliminar_objeto
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.receives('/RegistrarObjeto')
+    @bot.receives('Llaves')
+    @bot.receives('Entrada')
+
+    @bot.expects(:send_message).with('Objeto Llaves eliminado correctamente')
+    @bot.receives('/EliminarObjeto')
+    @bot.receives('Llaves')
+
+    modelo = ModeloObjetos.new(metadata)
+    assert_equal([], modelo.listar)
+  end
+
+  def test_eliminar_objeto_inexistente
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.expects(:send_message).with('No encontré ningún objeto llamado Fantasma', anything)
+    @bot.receives('/EliminarObjeto')
+    @bot.receives('Fantasma')
+  end
+
+  def test_buscar_objeto
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.receives('/RegistrarObjeto')
+    @bot.receives('Mochila')
+    @bot.receives('Cuarto')
+
+    @bot.expects(:send_message).with('Encontré Mochila - Lugar: Cuarto', anything)
+    @bot.receives('/BuscarObjeto')
+    @bot.receives('Mochila')
+  end
+
+  def test_buscar_objeto_inexistente
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.expects(:send_message).with('No encontré ningún objeto llamado Mochila', anything)
+    @bot.receives('/BuscarObjeto')
+    @bot.receives('Mochila')
+  end
+
+  def test_actualizar_objeto
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.receives('/RegistrarObjeto')
+    @bot.receives('Mochila')
+    @bot.receives('Cuarto')
+
+    @bot.expects(:send_message).with('Objeto Mochila actualizado al lugar: Sala', anything)
+    @bot.receives('/ActualizarObjeto')
+    @bot.receives('Mochila')
+    @bot.receives('Sala')
+
+    modelo = ModeloObjetos.new(metadata)
+    assert_equal([{ name: 'Mochila', place: 'Sala' }], modelo.listar)
+  end
+
+  def test_actualizar_objeto_inexistente
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.expects(:send_message).with('No encontré ningún objeto llamado Fantasma', anything)
+    @bot.receives('/ActualizarObjeto')
+    @bot.receives('Fantasma')
+    @bot.receives('Sala')
+  end
 end

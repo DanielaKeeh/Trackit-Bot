@@ -3,7 +3,7 @@
 require './main'
 
 def lambda_handler(event:, _context:)
-  secret_token = ENV['SECRET_TOKEN']
+  secret_token = ENV.fetch('SECRET_TOKEN', nil)
   header_token = event.dig('headers', 'x-telegram-bot-api-secret-token')
 
   return { statusCode: 403, body: JSON.generate('Forbidden') } unless header_token == secret_token
