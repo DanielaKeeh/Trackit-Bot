@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'test_helper'
 
 class TestBotCommands < BotTest
@@ -9,7 +11,8 @@ class TestBotCommands < BotTest
     @bot.receives('TestObjeto')
     @bot.receives('Cocina')
     modelo = ModeloObjetos.new(metadata)
-    assert_equal([{ name: 'TestObjeto', place: 'Cocina' }], modelo.listar, "El objeto debería haberse registrado correctamente")
+    assert_equal([{ name: 'TestObjeto', place: 'Cocina' }], modelo.listar,
+                 'El objeto debería haberse registrado correctamente')
   end
 
   def test_registrar_objeto_duplicado

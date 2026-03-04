@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 require './main'
 
-def lambda_handler(event:, context:)
+def lambda_handler(event:, _context:)
   secret_token = ENV['SECRET_TOKEN']
   header_token = event.dig('headers', 'x-telegram-bot-api-secret-token')
 
-  unless header_token == secret_token
-    return { statusCode: 403, body: JSON.generate('Forbidden') }
-  end
+  return { statusCode: 403, body: JSON.generate('Forbidden') } unless header_token == secret_token
 
   body = JSON.parse(event['body'])
 
