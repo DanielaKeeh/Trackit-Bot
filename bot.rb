@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# Practicamente los comandos del bot, ahorita está asi pero se le añadirá un controlador para separar la lógica de los comandos, y así tener un código más limpio y organizado.
-# enable_command_help!
-# futuramente añadir hint: 'Registra un nuevo objeto'
+# Bot principal de trackit
 require_relative 'models/modelo_objetos'
 class Trackit < Kybus::Bot::Base
   def initialize(configs)
-    super(configs)
-    register_command('/RegistrarObjeto', nombre: '¿Qué objeto quieres registrar?', lugar: '¿En qué lugar suele estar?') do # esto es la vista
+    super
+    register_command('/RegistrarObjeto',
+                     nombre: '¿Qué objeto quieres registrar?',
+                     lugar: '¿En qué lugar suele estar?') do # esto es la vista
       modelo_objetos = ModeloObjetos.new(metadata)
       name = params[:nombre]
       place = params[:lugar]
@@ -39,6 +39,31 @@ class Trackit < Kybus::Bot::Base
       if modelo_objetos.buscar(name: name)
         modelo_objetos.eliminar(name: name)
         send_message("Objeto #{name} eliminado correctamente")
+      else
+        send_message("No encontré ningún objeto llamado #{name}")
+      end
+    end
+
+    register_command('/BuscarObjeto', nombre: '¿Qué objeto quieres buscar?') do
+      modelo_objetos = ModeloObjetos.new(metadata)
+      name = params[:nombre]
+      objeto = modelo_objetos.buscar(name: name)
+      if objeto
+        send_message("Encontré #{objeto[:name]} - Lugar: #{objeto[:place]}")
+      else
+        send_message("No encontré ningún objeto llamado #{name}")
+      end
+    end
+
+    register_command('/ActualizarObjeto',
+                     nombre: '¿Qué objeto quieres actualizar?',
+                     nuevo_lugar: '¿Cuál es el nuevo lugar?') do
+      modelo_objetos = ModeloObjetos.new(metadata)
+      name = params[:nombre]
+      nuevo_lugar = params[:nuevo_lugar]
+      if modelo_objetos.buscar(name: name)
+        modelo_objetos.actualizar({ name: name }, { place: nuevo_lugar })
+        send_message("Objeto #{name} actualizado al lugar: #{nuevo_lugar}")
       else
         send_message("No encontré ningún objeto llamado #{name}")
       end
