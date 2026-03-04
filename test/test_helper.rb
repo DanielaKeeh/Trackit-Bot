@@ -15,7 +15,7 @@ require_relative '../main'
 
 class BotTest < Minitest::Test
   def setup
-    @default_channel = 'test_channel_' + rand(1000..9999).to_s
+    @default_channel = "test_channel_#{rand(1000..9999)}"
     @bot ||= Trackit.make_test_bot('channel_id' => @default_channel, 'inline_args' => true)
     nil
   end

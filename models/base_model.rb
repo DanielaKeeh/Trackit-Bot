@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Clase base para modelos de datos, proporcionando métodos CRUD básicos.
 class BaseModel
   def initialize(almacenamiento, tabla)
     @almacenamiento = almacenamiento

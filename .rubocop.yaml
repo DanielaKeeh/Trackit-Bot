@@ -1,0 +1,13 @@
+cat > .rubocop.yml << 'EOF'
+AllCops: 
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  SuggestExtensions: false
+
+Metrics/MethodLength:
+  Max: 40
+
+Metrics/AbcSize:
+  Max: 35
+
+EOF
