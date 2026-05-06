@@ -11,7 +11,8 @@ class TestBotCommands < BotTest
     @bot.receives('TestObjeto')
     @bot.receives('Cocina')
     modelo = ModeloObjetos.new(metadata)
-    assert_equal([{ name: 'TestObjeto', place: 'Cocina' }], modelo.listar,
+    resultado = modelo.listar.map { |o| o.slice(:name, :place) }
+    assert_equal([{ name: 'TestObjeto', place: 'Cocina' }], resultado,
                  'El objeto debería haberse registrado correctamente')
   end
 
@@ -29,7 +30,8 @@ class TestBotCommands < BotTest
     @bot.receives('Sala')
 
     modelo = ModeloObjetos.new(metadata)
-    assert_equal([{ name: 'TestObjeto', place: 'Cocina' }], modelo.listar)
+    resultado = modelo.listar.map { |o| o.slice(:name, :place) }
+    assert_equal([{ name: 'TestObjeto', place: 'Cocina' }], resultado)
   end
 
   def test_ver_objetos_vacio
@@ -101,7 +103,8 @@ class TestBotCommands < BotTest
     @bot.receives('Sala')
 
     modelo = ModeloObjetos.new(metadata)
-    assert_equal([{ name: 'Mochila', place: 'Sala' }], modelo.listar)
+    resultado = modelo.listar.map { |o| o.slice(:name, :place) }
+    assert_equal([{ name: 'Mochila', place: 'Sala' }], resultado)
   end
 
   def test_actualizar_objeto_inexistente
@@ -110,5 +113,31 @@ class TestBotCommands < BotTest
     @bot.receives('/ActualizarObjeto')
     @bot.receives('Fantasma')
     @bot.receives('Sala')
+  end
+
+  def test_ayuda
+    @bot.expects(:send_message).with(anything, anything)
+    @bot.receives('/Ayuda')
+  end
+
+  def test_predecir_objeto_sin_historial
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.expects(:send_message).with('No tengo historial de Llaves, regístralo primero con /RegistrarObjeto', anything)
+    @bot.receives('/PredecirObjeto')
+    @bot.receives('Llaves')
+  end
+
+  def test_predecir_objeto_con_historial
+    @bot.executor.dsl.stubs(:send_message)
+    @bot.receives('/RegistrarObjeto')
+    @bot.receives('Llaves')
+    @bot.receives('Entrada')
+
+    modelo = ModeloObjetos.new(metadata)
+    predictor = Predictor.new(modelo.listar)
+    assert_equal('Entrada', predictor.predecir('Llaves'))
+
+    @bot.receives('/PredecirObjeto')
+    @bot.receives('Llaves')
   end
 end

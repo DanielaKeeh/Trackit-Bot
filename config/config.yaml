@@ -2,7 +2,7 @@ bots:
   main:
     provider:
       name: telegram
-      token: *
+      token: 7852198078:AAHZLvmLVhR2HdbKwxguiZ65pd_8Ck_FwmA
       mode: webhook_lambda
       debug: true
     state_repository:
@@ -17,7 +17,7 @@ bots:
     inline_args: true
     provider:
       name: telegram
-      token: *
+      token: 7852198078:AAHZLvmLVhR2HdbKwxguiZ65pd_8Ck_FwmA
       debug: true
     state_repository:
               name: sequel
