@@ -1,72 +1,25 @@
 # frozen_string_literal: true
 
-# Bot principal de trackit
+# Bot principal de Trackit
 require_relative 'models/modelo_objetos'
+require_relative 'lib/commands/registrar_objeto'
+require_relative 'lib/commands/ver_objetos'
+require_relative 'lib/commands/eliminar_objeto'
+require_relative 'lib/commands/buscar_objeto'
+require_relative 'lib/commands/actualizar_objeto'
+require_relative 'lib/commands/predecir_objeto'
+require_relative 'lib/predictor'
+require_relative 'lib/commands/ayuda'
+
 class Trackit < Kybus::Bot::Base
   def initialize(configs)
     super
-    register_command('/RegistrarObjeto',
-                     nombre: '¿Qué objeto quieres registrar?',
-                     lugar: '¿En qué lugar suele estar?') do # esto es la vista
-      modelo_objetos = ModeloObjetos.new(metadata)
-      name = params[:nombre]
-      place = params[:lugar]
-      if modelo_objetos.buscar(name: name)
-        send_message('ya existe este objeto')
-        next
-      end
-      modelo_objetos.crear(name: name, place: place)
-      send_message("Objeto #{name} registrado")
-    end
-
-    register_command('/VerObjetos') do
-      modelo_objetos = ModeloObjetos.new(metadata)
-      listado = modelo_objetos.listar
-      if listado.empty?
-        send_message('No tienes objetos registrados')
-      else
-        message = "Tus objetos registrados:\n"
-        listado.each_with_index do |obj, index|
-          message += "#{index + 1}. #{obj[:name]} - Lugar: #{obj[:place]}\n"
-        end
-        send_message(message)
-      end
-    end
-
-    register_command('/EliminarObjeto', nombre: '¿Qué objeto quieres eliminar?') do
-      modelo_objetos = ModeloObjetos.new(metadata)
-      name = params[:nombre]
-      if modelo_objetos.buscar(name: name)
-        modelo_objetos.eliminar(name: name)
-        send_message("Objeto #{name} eliminado correctamente")
-      else
-        send_message("No encontré ningún objeto llamado #{name}")
-      end
-    end
-
-    register_command('/BuscarObjeto', nombre: '¿Qué objeto quieres buscar?') do
-      modelo_objetos = ModeloObjetos.new(metadata)
-      name = params[:nombre]
-      objeto = modelo_objetos.buscar(name: name)
-      if objeto
-        send_message("Encontré #{objeto[:name]} - Lugar: #{objeto[:place]}")
-      else
-        send_message("No encontré ningún objeto llamado #{name}")
-      end
-    end
-
-    register_command('/ActualizarObjeto',
-                     nombre: '¿Qué objeto quieres actualizar?',
-                     nuevo_lugar: '¿Cuál es el nuevo lugar?') do
-      modelo_objetos = ModeloObjetos.new(metadata)
-      name = params[:nombre]
-      nuevo_lugar = params[:nuevo_lugar]
-      if modelo_objetos.buscar(name: name)
-        modelo_objetos.actualizar({ name: name }, { place: nuevo_lugar })
-        send_message("Objeto #{name} actualizado al lugar: #{nuevo_lugar}")
-      else
-        send_message("No encontré ningún objeto llamado #{name}")
-      end
-    end
+    Commands::RegistrarObjeto.register(self)
+    Commands::VerObjetos.register(self)
+    Commands::EliminarObjeto.register(self)
+    Commands::BuscarObjeto.register(self)
+    Commands::ActualizarObjeto.register(self)
+    Commands::PredecirObjeto.register(self)
+    Commands::Ayuda.register(self)
   end
 end

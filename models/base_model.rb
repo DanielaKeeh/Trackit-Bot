@@ -9,7 +9,7 @@ class BaseModel
   end
 
   def crear(datos)
-    @almacenamiento[@tabla] << datos
+    @almacenamiento[@tabla] << datos.merge(created_at: Time.now)
   end
 
   def buscar(criterio)
@@ -21,6 +21,7 @@ class BaseModel
     return unless registro
 
     nuevos_datos.each { |k, v| registro[k] = v }
+    registro[:updated_at] = Time.now
   end
 
   def eliminar(criterio)

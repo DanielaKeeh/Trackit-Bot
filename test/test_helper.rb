@@ -5,6 +5,7 @@ require 'minitest/test'
 require 'minitest/autorun'
 require 'mocha/minitest'
 require 'webmock/minitest'
+require_relative '../lib/predictor'
 
 # SimpleCov.minimum_coverage 100 # Esta línea es para que truene si no se alcanza el 100% de cobertura
 SimpleCov.start

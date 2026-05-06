@@ -4,6 +4,6 @@ dynamo:
   capacity: REPLACE_ME
   table_name: REPLACE_ME
 chat_provider: token
-bot_token: *
-secret_token: *
+bot_token: 7852198078:AAHZLvmLVhR2HdbKwxguiZ65pd_8Ck_FwmA
+secret_token: elsupertokenvaasermuchotextoparaquenoseteolvidaqueesteNOsesubeaGitwey
 
