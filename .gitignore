@@ -1,6 +1,11 @@
 coverage
 storage
 tmp/rubycritic
-
+config/config.yaml
+lambda/bot_handler/vendor/
+lambda/reminder/vendor/
+lambda/bot_handler/.bundle/
+lambda/reminder/.bundle/
+lambda/*.zip
 
 
