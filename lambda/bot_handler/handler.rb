@@ -24,6 +24,10 @@ def lambda_handler(event:, context:)
   { statusCode: 200, body: 'ok' }
 end
 
+def normalizar(nombre)
+  nombre.downcase.strip
+end
+
 def handle_command(chat_id, text)
   command = text.split.first
 
@@ -64,6 +68,7 @@ def handle_command(chat_id, text)
 end
 
 def registrar(chat_id, name, place)
+  name = normalizar(name)
   resultado = buscar_dynamo(chat_id, name)
   return "Ya existe un objeto llamado #{name}" if resultado
 
@@ -95,6 +100,7 @@ def ver_objetos(chat_id)
 end
 
 def buscar(chat_id, name)
+  name = normalizar(name)
   obj = buscar_dynamo(chat_id, name)
   return "No encontré ningún objeto llamado #{name}" unless obj
 
@@ -102,6 +108,7 @@ def buscar(chat_id, name)
 end
 
 def eliminar(chat_id, name)
+  name = normalizar(name)
   return "No encontré ningún objeto llamado #{name}" unless buscar_dynamo(chat_id, name)
 
   DYNAMODB.delete_item(
@@ -112,6 +119,7 @@ def eliminar(chat_id, name)
 end
 
 def actualizar(chat_id, name, nuevo_lugar)
+  name = normalizar(name)
   return "No encontré ningún objeto llamado #{name}" unless buscar_dynamo(chat_id, name)
 
   DYNAMODB.update_item(
@@ -127,6 +135,7 @@ def actualizar(chat_id, name, nuevo_lugar)
 end
 
 def predecir(chat_id, name)
+  name = normalizar(name)
   resultado = DYNAMODB.query(
     table_name: TABLE_NAME,
     key_condition_expression: 'user_id = :uid AND object_name = :obj',
