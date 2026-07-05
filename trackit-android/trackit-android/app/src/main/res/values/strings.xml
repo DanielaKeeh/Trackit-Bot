@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trackit</string>
+
+    <string name="login_title">Trackit Bot</string>
+    <string name="login_subtitle">Recuerda dónde dejaste tus cosas</string>
+    <string name="hint_username">Usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="action_login">Entrar</string>
+    <string name="action_register">Crear cuenta</string>
+    <string name="toggle_to_register">¿No tienes cuenta? Regístrate</string>
+    <string name="toggle_to_login">¿Ya tienes cuenta? Inicia sesión</string>
+
+    <string name="tab_dashboard">Inicio</string>
+    <string name="tab_objects">Objetos</string>
+    <string name="tab_reminders">Recordatorios</string>
+    <string name="tab_chat">Chat</string>
+
+    <string name="dashboard_title">Hola de nuevo 👋</string>
+    <string name="dashboard_objects_count">Objetos registrados</string>
+    <string name="dashboard_reminders_count">Recordatorios activos</string>
+    <string name="dashboard_upcoming_reminders">Próximos recordatorios</string>
+    <string name="dashboard_recent_objects">Objetos recientes</string>
+    <string name="dashboard_empty">Aún no tienes nada registrado. Ve a la pestaña Objetos para empezar.</string>
+
+    <string name="objects_empty">No tienes objetos registrados</string>
+    <string name="objects_add">Registrar objeto</string>
+    <string name="objects_name_hint">¿Qué objeto?</string>
+    <string name="objects_place_hint">¿En qué lugar suele estar?</string>
+    <string name="objects_predict">Predecir ubicación</string>
+
+    <string name="reminders_empty">No tienes recordatorios</string>
+    <string name="reminders_add">Nuevo recordatorio</string>
+    <string name="reminders_message_hint">¿Qué quieres que te recuerde?</string>
+    <string name="reminders_hour_hint">Hora (HH:mm)</string>
+    <string name="reminders_recurring">Repetir todos los días</string>
+
+    <string name="chat_input_hint">Escribe un comando o mensaje</string>
+    <string name="chat_help">/Ayuda</string>
+
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_logout">Cerrar sesión</string>
+
+    <string name="error_generic">Algo salió mal, intenta de nuevo</string>
+    <string name="error_network">No se pudo conectar con el servidor</string>
+    <string name="error_fields_required">Completa todos los campos</string>
+</resources>
