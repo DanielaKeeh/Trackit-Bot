@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_page">#0E0E0E</color>
+    <color name="bg_surface">#161616</color>
+    <color name="bg_card">#1C1C1C</color>
+    <color name="bg_bubble_bot">#212121</color>
+    <color name="bg_bubble_user">#2B5278</color>
+
+    <color name="accent_blue">#1E88E5</color>
+    <color name="accent_blue_light">#4FC3F7</color>
+
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8E8E8E</color>
+    <color name="text_muted">#5A5A5A</color>
+
+    <color name="danger">#E24B4A</color>
+    <color name="success">#4CAF50</color>
+    <color name="border">#2A2A2A</color>
+</resources>

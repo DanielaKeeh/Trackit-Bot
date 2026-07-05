@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/editMessage"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_input"
+        android:hint="@string/reminders_message_hint"
+        android:textColorHint="@color/text_secondary"
+        android:textColor="@color/text_primary"
+        android:paddingHorizontal="16dp"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/editHour"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_input"
+        android:hint="@string/reminders_hour_hint"
+        android:textColorHint="@color/text_secondary"
+        android:textColor="@color/text_primary"
+        android:paddingHorizontal="16dp"
+        android:inputType="datetime"
+        android:singleLine="true" />
+
+    <CheckBox
+        android:id="@+id/checkRecurring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reminders_recurring"
+        android:textColor="@color/text_primary" />
+
+</LinearLayout>
