@@ -8,7 +8,7 @@ import com.trackit.app.data.repository.ReminderRepository
 
 /**
  * Traduce texto de chat a llamadas del REST API, igual que hacía el bot de
- * Telegram con sus comandos (lib/commands/*.rb) — solo que ahora vive en la
+ * Telegram con sus comandos (lib/commands) — solo que ahora vive en la
  * app (capa de presentación), no en el backend. Ver el diagrama de
  * arquitectura: esta clase es la contraparte Kotlin/Android de lo que antes
  * era el enrutador de comandos de Kybus Bot.

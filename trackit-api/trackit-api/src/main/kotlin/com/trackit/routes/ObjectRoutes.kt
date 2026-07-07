@@ -29,7 +29,7 @@ private fun TrackedObjectRecord.toDto() = TrackedObjectDto(
 /**
  * Módulo /api/objects (equivalente a los comandos
  * /RegistrarObjeto, /BuscarObjeto, /ActualizarObjeto, /EliminarObjeto, /VerObjetos
- * del bot original en lib/commands/*.rb).
+ * del bot original en lib/commands).
  */
 fun Route.objectRoutes(objectRepository: ObjectRepository) {
     authenticate("auth-jwt") {

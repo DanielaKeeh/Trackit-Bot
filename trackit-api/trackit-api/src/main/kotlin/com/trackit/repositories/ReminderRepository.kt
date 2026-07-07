@@ -4,6 +4,7 @@ import com.trackit.models.Reminders
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.SqlExpressionBuilder
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll
@@ -74,7 +75,9 @@ class ReminderRepository {
     }
 
     suspend fun eliminar(userId: Long, id: Long): Boolean = newSuspendedTransaction(Dispatchers.IO) {
-        val filas = Reminders.deleteWhere { (Reminders.userId eq userId) and (Reminders.id eq id) }
+        val filas = Reminders.deleteWhere {
+            with(SqlExpressionBuilder) { (Reminders.userId eq userId) and (Reminders.id eq id) }
+        }
         filas > 0
     }
 

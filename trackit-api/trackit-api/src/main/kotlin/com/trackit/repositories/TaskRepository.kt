@@ -4,6 +4,7 @@ import com.trackit.models.Tasks
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.SqlExpressionBuilder
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll
@@ -53,7 +54,9 @@ class TaskRepository {
     }
 
     suspend fun eliminar(userId: Long, id: Long): Boolean = newSuspendedTransaction(Dispatchers.IO) {
-        val filas = Tasks.deleteWhere { (Tasks.userId eq userId) and (Tasks.id eq id) }
+        val filas = Tasks.deleteWhere {
+            with(SqlExpressionBuilder) { (Tasks.userId eq userId) and (Tasks.id eq id) }
+        }
         filas > 0
     }
 
